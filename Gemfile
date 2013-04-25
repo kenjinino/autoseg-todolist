@@ -42,3 +42,5 @@ gem 'rspec-rails','~> 2.0', :group => [:test, :development]
 group :test do
   gem 'capybara'
 end
+
+gem 'devise'
