@@ -1,27 +1,40 @@
-<h1>Listing todolists</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Public</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @todolists.each do |todolist| %>
-  <tr>
-    <td><%= todolist.title %></td>
-    <td><%= todolist.public %></td>
-    <td><%= todolist.user %></td>
-    <td><%= link_to 'Show', todolist %></td>
-    <td><%= link_to 'Edit', edit_todolist_path(todolist) %></td>
-    <td><%= link_to 'Destroy', todolist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Todolist -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:public) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @todolists.each do |todolist| %>
+      <tr>
+        <td><%= link_to todolist.id, todolist_path(todolist) %></td>
+        <td><%= todolist.title %></td>
+        <td><%= todolist.public %></td>
+        <td><%= todolist.user.email %></td>
+        <td><%=l todolist.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_todolist_path(todolist), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      todolist_path(todolist),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Todolist', new_todolist_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_todolist_path,
+            :class => 'btn btn-primary' %>

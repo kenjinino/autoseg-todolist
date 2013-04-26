@@ -1,29 +1,13 @@
-<%= form_for(@todolist) do |f| %>
-  <% if @todolist.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@todolist.errors.count, "error") %> prohibited this todolist from being saved:</h2>
+<%= simple_form_for @todolist, :html => { :class => 'form-horizontal' } do |f| %>
 
-      <ul>
-      <% @todolist.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.error_notification %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :public %><br />
-    <%= f.check_box :public %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.input :title, input_html: { maxlength: 255 } %>
+  <%= f.input :public %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                todolists_path, :class => 'btn' %>
   </div>
 <% end %>

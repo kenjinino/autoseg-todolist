@@ -2,7 +2,7 @@ class TodolistsController < ApplicationController
   # GET /todolists
   # GET /todolists.json
   def index
-    @todolists = Todolist.all
+    @todolists = Todolist.includes(:user)
 
     respond_to do |format|
       format.html # index.html.erb
