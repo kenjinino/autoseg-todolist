@@ -1,4 +1,7 @@
 AutosegTodolist::Application.routes.draw do
+  resources :todolists
+
+
   devise_for :users
 
   get "home/index"

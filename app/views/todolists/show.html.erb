@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @todolist.title %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%= @todolist.public %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @todolist.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_todolist_path(@todolist) %> |
+<%= link_to 'Back', todolists_path %>

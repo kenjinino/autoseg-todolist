@@ -1,0 +1,27 @@
+<h1>Listing todolists</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Public</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @todolists.each do |todolist| %>
+  <tr>
+    <td><%= todolist.title %></td>
+    <td><%= todolist.public %></td>
+    <td><%= todolist.user %></td>
+    <td><%= link_to 'Show', todolist %></td>
+    <td><%= link_to 'Edit', edit_todolist_path(todolist) %></td>
+    <td><%= link_to 'Destroy', todolist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Todolist', new_todolist_path %>
