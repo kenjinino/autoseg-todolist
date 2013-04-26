@@ -2,7 +2,7 @@ class TodolistsController < ApplicationController
   # GET /todolists
   # GET /todolists.json
   def index
-    @todolists = Todolist.includes(:user)
+    @todolists = Todolist.where(user_id: current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,6 +78,15 @@ class TodolistsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to todolists_url }
       format.json { head :no_content }
+    end
+  end
+
+  def public
+    @todolists = Todolist.where("public = ? AND user_id <> ?", true, current_user.id).includes(:user).order("todolists.user_id ASC, todolists.created_at DESC")
+
+    respond_to do |format|
+      format.html # public.html.erb
+      format.json { render json: @todolists }
     end
   end
 end

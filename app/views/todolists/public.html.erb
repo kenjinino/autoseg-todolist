@@ -1,0 +1,26 @@
+<%- model_class = Todolist -%>
+<div class="page-header">
+  <h1>Public <%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:public) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @todolists.each do |todolist| %>
+      <tr>
+        <td><%= link_to todolist.id, todolist_path(todolist) %></td>
+        <td><%= todolist.title %></td>
+        <td><%= todolist.public %></td>
+        <td><%= todolist.user_id %></td>
+        <td><%=l todolist.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

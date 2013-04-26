@@ -19,7 +19,7 @@
         <td><%= link_to todolist.id, todolist_path(todolist) %></td>
         <td><%= todolist.title %></td>
         <td><%= todolist.public %></td>
-        <td><%= todolist.user.email %></td>
+        <td><%= todolist.user_id %></td>
         <td><%=l todolist.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

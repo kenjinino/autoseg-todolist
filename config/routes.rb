@@ -1,6 +1,7 @@
 AutosegTodolist::Application.routes.draw do
-  resources :todolists
-
+  resources :todolists do
+    get 'public', on: :collection
+  end
 
   devise_for :users
 
