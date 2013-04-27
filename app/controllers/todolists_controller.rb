@@ -4,10 +4,7 @@ class TodolistsController < ApplicationController
   def index
     @todolists = Todolist.where(user_id: current_user.id)
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @todolists }
-    end
+    respond_with @todolists
   end
 
   # GET /todolists/1
@@ -15,10 +12,7 @@ class TodolistsController < ApplicationController
   def show
     @todolist = Todolist.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @todolist }
-    end
+    respond_with @todolist
   end
 
   # GET /todolists/new
@@ -26,10 +20,7 @@ class TodolistsController < ApplicationController
   def new
     @todolist = Todolist.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @todolist }
-    end
+    respond_with @todolist
   end
 
   # GET /todolists/1/edit
@@ -41,32 +32,18 @@ class TodolistsController < ApplicationController
   # POST /todolists.json
   def create
     @todolist = current_user.todolists.new(params[:todolist])
+    @todolist.save
 
-    respond_to do |format|
-      if @todolist.save
-        format.html { redirect_to @todolist, notice: 'Todolist was successfully created.' }
-        format.json { render json: @todolist, status: :created, location: @todolist }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @todolist.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with @todolist
   end
 
   # PUT /todolists/1
   # PUT /todolists/1.json
   def update
     @todolist = Todolist.find(params[:id])
+    @todolist.update_attributes(params[:todolist])
 
-    respond_to do |format|
-      if @todolist.update_attributes(params[:todolist])
-        format.html { redirect_to @todolist, notice: 'Todolist was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @todolist.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with @todolist
   end
 
   # DELETE /todolists/1
@@ -75,18 +52,12 @@ class TodolistsController < ApplicationController
     @todolist = Todolist.find(params[:id])
     @todolist.destroy
 
-    respond_to do |format|
-      format.html { redirect_to todolists_url }
-      format.json { head :no_content }
-    end
+    respond_with @todolist
   end
 
   def public
     @todolists = Todolist.where("public = ? AND user_id <> ?", true, current_user.id).includes(:user).order("todolists.user_id ASC, todolists.created_at DESC")
 
-    respond_to do |format|
-      format.html # public.html.erb
-      format.json { render json: @todolists }
-    end
+    respond_with @todolists
   end
 end
