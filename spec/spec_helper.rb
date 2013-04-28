@@ -36,4 +36,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # including rspec helpers
+  config.include(UserMacros)
 end

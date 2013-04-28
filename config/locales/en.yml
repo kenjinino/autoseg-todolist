@@ -3,11 +3,16 @@
 
 en:
   flash:
+    cancan:
+      denied:
+        alert: "Access denied."
+        not_signed_in:
+          alert: "You are not signed in."
     actions:
       create:
         notice: "%{resource_name} was successfully created."
       update:
         notice: "%{resource_name} was successfully updated."
       destroy:
-        notice: "%{resource_name} was successfully destroyed."
-        alert: "%{resource_name} could not be destroyed."
+        notice: "%{resource_name} was successfully deleted."
+        alert: "%{resource_name} could not be deleted."

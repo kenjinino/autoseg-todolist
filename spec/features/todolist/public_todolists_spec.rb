@@ -14,11 +14,7 @@ describe "Todolists" do
       let!(:other_private_todolist) { FactoryGirl.create(:todolist, public: false, user: other_user) }
 
       before do
-        visit new_user_session_path
-        fill_in "user_email", with: user.email
-        fill_in "user_password", with: user.password
-        click_button "Sign in"
-
+        login_as user
         click_on "Public todolists"
       end
   
