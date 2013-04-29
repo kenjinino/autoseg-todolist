@@ -186,12 +186,16 @@ describe "Users abilities" do
           end
 
           it "can bookmark a todolist that he does not own" do
-            find(:xpath, "//input[@value=\"Unbookmark\"]")
+            within(:xpath, "//tr[td/a[@href=\"#{todolist_path(other_public_todolist)}\"]]") do
+              find(:xpath, ".//input[@value=\"Unbookmark\"]")
+            end
             should have_content("Bookmark was successfully created")
           end
 
           it "can unbookmark a todolist that he does not own" do
-            find(:xpath, "//input[@value=\"Unbookmark\"]").click
+            within(:xpath, "//tr[td/a[@href=\"#{todolist_path(other_public_todolist)}\"]]") do
+              find(:xpath, ".//input[@value=\"Unbookmark\"]").click
+            end
             should have_content("Bookmark was successfully deleted")
           end
         end

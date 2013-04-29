@@ -8,9 +8,9 @@ class Ability
       can :read, Todolist, public: true
 
       can :read, Todolist, public: false, user_id: user.id
-      can [:update, :destroy, :public], Todolist, user_id: user.id
+      can [:update, :destroy, :public, :bookmarked], Todolist, user_id: user.id
 
-      can [:create, :destroy], Bookmark, user_id: user.id
+      can [:create, :destroy], Bookmark, user_id: user.id, todolist: { public: true }
     end
     # Define abilities for the passed in user here. For example:
     #
