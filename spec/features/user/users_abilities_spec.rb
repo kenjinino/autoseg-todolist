@@ -178,6 +178,24 @@ describe "Users abilities" do
           should_not have_link("Delete", href: todolist_path(other_public_todolist))
         end
 
+        describe "bookmarking" do
+          before do
+            within(:xpath, "//tr[td/a[@href=\"#{todolist_path(other_public_todolist)}\"]]") do
+              click_on "Bookmark"
+            end
+          end
+
+          it "can bookmark a todolist that he does not own" do
+            find(:xpath, "//input[@value=\"Unbookmark\"]")
+            should have_content("Bookmark was successfully created")
+          end
+
+          it "can unbookmark a todolist that he does not own" do
+            find(:xpath, "//input[@value=\"Unbookmark\"]").click
+            should have_content("Bookmark was successfully deleted")
+          end
+        end
+
         context "when accessing directly" do
 
           it "cannot have permission to edit a public todolist that he does not own" do
