@@ -62,4 +62,10 @@ class TodolistsController < ApplicationController
 
     respond_with @todolists
   end
+
+  def bookmarked
+    @todolists = current_user.bookmarked_todolists
+
+    respond_with @todolists
+  end
 end
