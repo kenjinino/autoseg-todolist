@@ -1,0 +1,6 @@
+<% unless todolist.bookmarkers.include?(current_user) %>
+  <%= render 'bookmark', todolist: todolist %>
+<% else %>
+  <%= render 'unbookmark', todolist: todolist %>
+<% end %>
+

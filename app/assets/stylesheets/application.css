@@ -11,3 +11,6 @@
  *= require_self
  *= require_tree .
  */
+
+form.simple_form.new_bookmark, form.simple_form.edit_bookmark { margin: 0px; }
+

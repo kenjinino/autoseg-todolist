@@ -1,0 +1,4 @@
+<%= simple_form_for(current_user.bookmarks.build(todolist_id: todolist.id)) do |f| %>
+  <div><%= f.hidden_field :todolist_id %></div>
+  <%= f.submit "Bookmark", class: "btn btn-mini btn-primary" %>
+<% end %>

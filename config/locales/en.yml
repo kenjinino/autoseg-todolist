@@ -2,4 +2,17 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  flash:
+    cancan:
+      denied:
+        alert: "Access denied."
+        not_signed_in:
+          alert: "You are not signed in."
+    actions:
+      create:
+        notice: "%{resource_name} was successfully created."
+      update:
+        notice: "%{resource_name} was successfully updated."
+      destroy:
+        notice: "%{resource_name} was successfully deleted."
+        alert: "%{resource_name} could not be deleted."

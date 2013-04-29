@@ -38,12 +38,19 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger', group: [:test, :development]
 
 gem 'rspec-rails','~> 2.0', :group => [:test, :development]
 
 group :test do
   gem 'capybara'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'guard-rspec'
+  gem 'rb-inotify', '~> 0.9'
+  gem 'launchy'
 end
 
 gem 'devise'
+gem 'simple_form'
+gem 'responders'
+gem 'cancan'

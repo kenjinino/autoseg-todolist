@@ -1,9 +1,18 @@
 AutosegTodolist::Application.routes.draw do
+  resources :todolists do
+    get 'public', on: :collection
+    get 'bookmarked', on: :collection
+  end
+
+  resources :bookmarks, only: [:create, :destroy]
+
   devise_for :users
 
   get "home/index"
 
-  root to: 'home#index'
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

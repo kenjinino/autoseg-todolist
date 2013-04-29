@@ -46,11 +46,9 @@
           </a>
           <a class="brand" href="#">AutosegTodolist</a>
           <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
+            <!--ul class="nav">
+              <li><%#= link_to "Public todolists", public_todolists_path  %></li>
+            </ul-->
             <ul class="nav pull-right">
               <% if user_signed_in? %>
                 <li>
@@ -78,14 +76,16 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.well -->
+          <% if user_signed_in? %>
+            <div class="well sidebar-nav">
+             <ul class="nav nav-list">
+                <li class="nav-header">Sidebar</li>
+                <li><%= link_to "Home", todolists_path  %></li>
+                <li><%= link_to "Public todolists", public_todolists_path  %></li>
+                <li><%= link_to "Bookmarked todolists", bookmarked_todolists_path  %></li>
+              </ul>
+           </div><!--/.well -->
+          <% end %>
         </div><!--/span-->
         <div class="span9">
           <%= bootstrap_flash %>
