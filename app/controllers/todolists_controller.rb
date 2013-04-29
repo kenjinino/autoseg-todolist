@@ -58,7 +58,7 @@ class TodolistsController < ApplicationController
   end
 
   def public
-    @todolists = Todolist.where("public = ? AND user_id <> ?", true, current_user.id).includes(:user).order("todolists.user_id ASC, todolists.created_at DESC")
+    @todolists = Todolist.where("public = ? AND user_id <> ?", true, current_user.id).includes(:bookmarkers).order("todolists.user_id ASC, todolists.created_at DESC")
 
     respond_with @todolists
   end

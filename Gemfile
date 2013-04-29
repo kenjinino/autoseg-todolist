@@ -38,7 +38,7 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger', group: [:test, :development]
 
 gem 'rspec-rails','~> 2.0', :group => [:test, :development]
 

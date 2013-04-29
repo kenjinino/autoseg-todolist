@@ -1,0 +1,4 @@
+<%= simple_form_for(current_user.bookmarks.find_by_todolist_id(todolist.id),
+      html: { method: :delete }) do |f| %>
+  <%= f.submit "Unbookmark", class: "btn btn-mini" %>
+<% end %>

@@ -2,6 +2,7 @@ AutosegTodolist::Application.routes.draw do
   resources :todolists do
     get 'public', on: :collection
   end
+  resources :bookmarks, only: [:create, :destroy]
 
   devise_for :users
 

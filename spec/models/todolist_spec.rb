@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Todolist do
+
+  it { should respond_to :bookmarks }
+  it { should respond_to :bookmarkers }
+  it { should respond_to :bookmarker? }
+
   let(:todolist) { FactoryGirl.build(:todolist) }
   
   it "cannot have a blank title" do
