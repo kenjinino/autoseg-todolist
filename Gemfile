@@ -48,6 +48,8 @@ group :test do
   gem 'guard-rspec'
   gem 'rb-inotify', '~> 0.9'
   gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 gem 'devise'

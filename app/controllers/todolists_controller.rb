@@ -12,7 +12,8 @@ class TodolistsController < ApplicationController
   # GET /todolists/1
   # GET /todolists/1.json
   def show
-    @todolist = Todolist.find(params[:id])
+    @todolist = Todolist.includes(:todos).find(params[:id])
+    @todo = Todo.new
 
     respond_with @todolist
   end

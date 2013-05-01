@@ -22,5 +22,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :todo do
+    sequence(:content) { |n| "todo's content #{n}" }
+    done true
+    todolist
+  end
+
 end
 

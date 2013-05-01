@@ -1,7 +1,11 @@
 AutosegTodolist::Application.routes.draw do
+
+  get "todos/create"
+
   resources :todolists do
     get 'public', on: :collection
     get 'bookmarked', on: :collection
+    resources :todos, except: [:index, :new]
   end
 
   resources :bookmarks, only: [:create, :destroy]

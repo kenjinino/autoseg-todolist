@@ -12,9 +12,35 @@
   <dd><%= @todolist.user_id %></dd>
 </dl>
 
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Done</th>
+      <th>Content</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="todos_list">
+    <% @todolist.todos.each do |todo| %>
+      <%= render 'todos/todos', todo: todo %>
+    <% end %>
+  </tbody>
+</table>
+
+<% if can? :update, @todolist %>
+<div class="well">
+  <h3>Todo</h3>
+  <div id="todo_form">
+  <%= render 'todos/todo_form', todolist: @todolist, todo: @todo %>
+  </div>
+</div>
+<% end %>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              todolists_path, :class => 'btn'  %>
+              :back, :class => 'btn'  %>
   <%= link_to( t('.edit', :default => t("helpers.links.edit")),
               edit_todolist_path(@todolist), :class => 'btn') if can? :update, @todolist %>
   <%= link_to( t('.destroy', :default => t("helpers.links.destroy")),

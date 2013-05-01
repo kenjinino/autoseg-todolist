@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  respond_to :html, :json
+  respond_to :html, :json, :js
   responders :flash, :http_cache
 
   check_authorization :unless => :devise_controller?

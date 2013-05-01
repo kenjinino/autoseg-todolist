@@ -1,0 +1,15 @@
+
+      <tr>
+        <td><%= link_to todo.id, todolist_todo_path(todo.todolist_id, todo.id) %></td>
+        <td><%= todo.done %></td>
+        <td><%= todo.content %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_todolist_todo_path(todo.todolist_id, todo.id), :class => 'btn btn-mini' if can? :update, todo.todolist %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      todolist_todo_path(todo.todolist_id, todo.id),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' if can? :update, todo.todolist %>
+        </td>
+      </tr>

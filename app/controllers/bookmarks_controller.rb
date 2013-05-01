@@ -1,14 +1,12 @@
 class BookmarksController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
 
   def create
     @todolist = Todolist.find(params[:bookmark][:todolist_id])
     current_user.bookmark!(@todolist)
 
 #    redirect_to public_todolists_path
-    respond_with(@todolist) do |format|
-      format.html { redirect_to public_todolists_path }
-    end
+    respond_with(@todolist, location: public_todolists_path)
   end
 
   def destroy
@@ -16,9 +14,7 @@ class BookmarksController < ApplicationController
     current_user.unbookmark!(@todolist)
 
 #    redirect_to public_todolists_path
-    respond_with(@todolist) do |format|
-      format.html { redirect_to public_todolists_path }
-    end
+    respond_with(@todolist, location: public_todolists_path)
   end
 
   private
