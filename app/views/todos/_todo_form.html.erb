@@ -1,0 +1,6 @@
+<%= simple_form_for [todolist, todo], remote: true do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :content, input_html: { rows: 4, maxlength: 500 } %>
+  <%= f.input :done %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428011124) do
+ActiveRecord::Schema.define(:version => 20130429235551) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20130428011124) do
   end
 
   add_index "todolists", ["user_id"], :name => "index_todolists_on_user_id"
+
+  create_table "todos", :force => true do |t|
+    t.text     "content"
+    t.integer  "todolist_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "done"
+  end
+
+  add_index "todos", ["todolist_id"], :name => "index_todos_on_todolist_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
