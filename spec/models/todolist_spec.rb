@@ -8,6 +8,10 @@ describe Todolist do
 
   it { should respond_to :todos }
 
+
+  let(:user) { FactoryGirl.create(:user) }
+  let(:another_user) { FactoryGirl.create(:user) }
+  let(:saved_todolist) {FactoryGirl.create(:todolist, user: user)}
   let(:todolist) { FactoryGirl.build(:todolist) }
   
   it "cannot have a blank title" do
@@ -25,15 +29,33 @@ describe Todolist do
     todolist.should_not be_valid
   end
 
+  subject { saved_todolist }
+  its(:user) { should == user }
+
+  describe "#bookmarker?" do
+    before do
+      another_user.bookmark!(saved_todolist)
+    end
+
+    it { should be_bookmarker(another_user) }
+    it "when unbookmarking" do
+      another_user.unbookmark!(saved_todolist)
+      should_not be_bookmarker(another_user)
+    end
+  end
+
+  describe "#bookmarkers" do
+    before do
+      another_user.bookmark!(saved_todolist)
+    end
+
+    its(:bookmarkers) { should include(another_user) }
+  end
 
   describe "todo association" do
     let!(:todo) { FactoryGirl.create(:todo, todolist: todolist) }
     
     context "when destroying todolist" do
-      before do
-#        todolist.save.should be_true
-      end
-
 
       it "has to destroy associated todos" do
         todos = todolist.todos.dup

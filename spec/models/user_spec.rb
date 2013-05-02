@@ -10,6 +10,24 @@ describe User do
   it {should respond_to :bookmark!}
   it {should respond_to :unbookmark!}
 
+  describe "todolist associations" do
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:todolist) { FactoryGirl.create(:todolist, user: user ) }
+
+    subject {user}
+    its(:todolists) { should include(todolist) }
+
+    it "should destroy associated todolists" do
+      todolists = user.todolists.dup
+      user.destroy
+      todolists.should_not be_empty
+      todolists.each do |t|
+        Todolist.find_by_id(t.id).should be_nil
+      end
+    end
+
+  end
+
   describe "bookmarking a todolist" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:todolist) { FactoryGirl.create(:todolist) }

@@ -14,6 +14,7 @@ describe "Todos" do
 
     let(:todo) { FactoryGirl.build(:todo) }
     let!(:saved_todo) { FactoryGirl.create(:todo, todolist: public_todolist) }
+    let!(:other_saved_todo) { FactoryGirl.create(:todo, todolist: other_public_todolist) }
     let(:another_todo) { FactoryGirl.build(:todo) }
 
     before do
@@ -67,10 +68,29 @@ describe "Todos" do
     context "when on others todolist" do
       before do
         click_on "Public todolists"
-        click_on "#{other_public_todolist}"
+        click_on "#{other_public_todolist.id}"
       end
 
-      describe "cannot create a new todo" do
+      it "cannot click on create todo" do
+        should_not have_button("Create Todo")
+      end
+
+      it "cannot click on edit todo" do
+        within(:xpath, "//tr[td/a[@href=\"#{todolist_todo_path(other_public_todolist, other_saved_todo)}\"]]") do
+          should_not have_button("Edit")
+        end
+      end
+
+      it "cannot click on destroy todo" do
+        within(:xpath, "//tr[td/a[@href=\"#{todolist_todo_path(other_public_todolist, other_saved_todo)}\"]]") do
+          should_not have_button("Delete")
+        end
+      end
+
+      it "can read a todo that he does not own" do
+        click_on "#{other_saved_todo.id}"
+        current_path.should eq(todolist_todo_path(other_public_todolist, other_saved_todo))
+        should have_content(other_saved_todo.content)
       end
     end
   end
